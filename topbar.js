@@ -11,7 +11,6 @@
       trackingUrl: 'https://topbar.app/api/track',
     };
   
-    // Create clickable wrapper
     const container = document.createElement('a');
     container.href = '#';
     container.style.cssText = `
@@ -21,40 +20,58 @@
       right: 0;
       background-color: ${config.backgroundColor};
       color: ${config.textColor};
-      z-index: 10;
-      padding: 12px 16px;
+      z-index: 9999;
       font-family: system-ui, sans-serif;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       text-decoration: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      height: auto;
+      min-height: 60px;
+      padding: 8px 12px;
     `;
   
-    // Add GIF
+    const gifWrapper = document.createElement('div');
+    gifWrapper.style.cssText = `
+      flex: 0 0 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 8px;
+    `;
+  
     const gif = document.createElement('img');
     gif.src = config.gifUrl;
+    gif.alt = 'Guide';
     gif.style.cssText = `
       height: 40px;
       max-width: 100%;
-      flex-shrink: 0;
+      object-fit: contain;
     `;
+    gifWrapper.appendChild(gif);
   
-    // Add message
-    const text = document.createElement('div');
-    text.textContent = config.message;
-    text.style.cssText = `
-      flex: 1 1 auto;
+    const textWrapper = document.createElement('div');
+    textWrapper.style.cssText = `
+      flex: 1;
       font-size: 14px;
       line-height: 1.4;
-      min-width: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
     `;
   
-    container.append(gif, text);
+    const text = document.createElement('span');
+    text.textContent = config.message;
+    text.style.cssText = `
+      display: inline-block;
+      width: 100%;
+      color: ${config.textColor};
+    `;
+    textWrapper.appendChild(text);
   
-    // Click handler on full bar
+    container.appendChild(gifWrapper);
+    container.appendChild(textWrapper);
+  
     container.addEventListener('click', (e) => {
       e.preventDefault();
   
@@ -75,10 +92,8 @@
   
     document.body.prepend(container);
   
-    // Adjust body margin to avoid hiding site's navbar
     setTimeout(() => {
-      const barHeight = container.offsetHeight;
-      document.body.style.marginTop = barHeight + 'px';
+      document.body.style.marginTop = container.offsetHeight + 'px';
     }, 100);
   })();
   
