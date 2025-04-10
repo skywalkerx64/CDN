@@ -7,10 +7,11 @@
       message: '🌐 Open this page in your browser for a better experience',
       backgroundColor: '#1E293B',
       textColor: '#FFFFFF',
-      gifUrl: 'https://data.textstudio.com/output/sample/animated/3/2/6/5/public-1-5623.gif',
+      gifUrl: 'https://example.com/guide.gif',
       trackingUrl: 'https://topbar.app/api/track',
     };
   
+    // Create container
     const container = document.createElement('div');
     container.style.cssText = `
       position: fixed;
@@ -30,6 +31,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     `;
   
+    // Add GIF
     const gif = document.createElement('img');
     gif.src = config.gifUrl;
     gif.style.cssText = `
@@ -38,6 +40,7 @@
       flex-shrink: 0;
     `;
   
+    // Add message
     const text = document.createElement('div');
     text.textContent = config.message;
     text.style.cssText = `
@@ -47,6 +50,7 @@
       min-width: 200px;
     `;
   
+    // Add button
     const button = document.createElement('button');
     button.textContent = 'Open in browser';
     button.style.cssText = `
@@ -63,12 +67,14 @@
     `;
   
     button.onclick = () => {
+      // Tracking
       fetch(config.trackingUrl, {
         method: 'POST',
         body: JSON.stringify({ action: 'click', timestamp: Date.now() }),
         headers: { 'Content-Type': 'application/json' }
       });
   
+      // Open in native browser
       if (/android/i.test(userAgent)) {
         window.location = 'intent://' + location.href.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
       } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
@@ -80,6 +86,11 @@
   
     container.append(gif, text, button);
     document.body.prepend(container);
-    document.body.style.marginTop = '70px';
+  
+    // Adjust body margin to avoid hiding the site's navbar/content
+    setTimeout(() => {
+      const barHeight = container.offsetHeight;
+      document.body.style.marginTop = barHeight + 'px';
+    }, 100);
   })();
   
