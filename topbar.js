@@ -21,7 +21,7 @@
       right: 0;
       background-color: ${config.backgroundColor};
       color: ${config.textColor};
-      z-index: 9999;
+      z-index: 10;
       padding: 12px 16px;
       font-family: system-ui, sans-serif;
       display: flex;
