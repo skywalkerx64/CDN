@@ -11,8 +11,9 @@
       trackingUrl: 'https://topbar.app/api/track',
     };
   
-    // Create container
-    const container = document.createElement('div');
+    // Create clickable wrapper
+    const container = document.createElement('a');
+    container.href = '#';
     container.style.cssText = `
       position: fixed;
       top: 0;
@@ -29,6 +30,7 @@
       justify-content: space-between;
       gap: 12px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-decoration: none;
     `;
   
     // Add GIF
@@ -50,31 +52,18 @@
       min-width: 200px;
     `;
   
-    // Add button
-    const button = document.createElement('button');
-    button.textContent = 'Open in browser';
-    button.style.cssText = `
-      background: white;
-      color: ${config.backgroundColor};
-      padding: 6px 12px;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      font-size: 14px;
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-    `;
+    container.append(gif, text);
   
-    button.onclick = () => {
-      // Tracking
+    // Click handler on full bar
+    container.addEventListener('click', (e) => {
+      e.preventDefault();
+  
       fetch(config.trackingUrl, {
         method: 'POST',
         body: JSON.stringify({ action: 'click', timestamp: Date.now() }),
         headers: { 'Content-Type': 'application/json' }
       });
   
-      // Open in native browser
       if (/android/i.test(userAgent)) {
         window.location = 'intent://' + location.href.replace(/^https?:\/\//, '') + '#Intent;scheme=https;package=com.android.chrome;end';
       } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
@@ -82,12 +71,11 @@
       } else {
         alert("Please open this page in your browser.");
       }
-    };
+    });
   
-    container.append(gif, text, button);
     document.body.prepend(container);
   
-    // Adjust body margin to avoid hiding the site's navbar/content
+    // Adjust body margin to avoid hiding site's navbar
     setTimeout(() => {
       const barHeight = container.offsetHeight;
       document.body.style.marginTop = barHeight + 'px';
