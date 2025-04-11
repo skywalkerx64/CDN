@@ -1,7 +1,7 @@
 (function () {
-  // const userAgent = navigator.userAgent || navigator.vendor;
-  // const isInAppBrowser = /FBAN|FBAV|Instagram|Telegram/i.test(userAgent);
-  // if (!isInAppBrowser) return;
+  const userAgent = navigator.userAgent || navigator.vendor;
+  const isInAppBrowser = /FBAN|FBAV|Instagram|Telegram/i.test(userAgent);
+  if (!isInAppBrowser) return;
 
   const apiBaseUrl = 'https://gjnunb49rd.loclx.io/api/links';
   const scriptTag = document.currentScript;
@@ -79,7 +79,7 @@
 
         fetch(apiBaseUrl + '/track/link/' + configId, {
           method: 'POST',
-          body: JSON.stringify({ action: 'click', timestamp: Date.now() }),
+          body: JSON.stringify({ action: 'click', timestamp: Date.now(), userAgent, url: location.href }),
           headers: { 'Content-Type': 'application/json' },
         });
 
