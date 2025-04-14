@@ -11,6 +11,13 @@
     if (!configId) return console.error('[TopBar] Missing config ID in script tag')
   
     const apiUrl = `${apiBaseUrl}/links/${configId}`
+
+    fetch(apiBaseUrl + '/track/link/' + configId, {
+        method: 'POST',
+        body: JSON.stringify({ action: 'visit', timestamp: Date.now(), userAgent, url: location.href }),
+        headers: { 'Content-Type': 'application/json' },
+      })
+
     fetch(apiUrl)
       .then((res) => res.json())
       .then((config) => {
