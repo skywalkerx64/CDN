@@ -65,6 +65,11 @@
             height: 100%;
           `
   
+          const span = document.createElement('span')
+          span.textContent = msg.message
+          span.style.cssText = 'font-size: 14px; line-height: 1.4;'
+          slide.appendChild(span)
+
           if (msg.gifUrl) {
             const gif = document.createElement('img')
             gif.src = msg.gifUrl
@@ -76,11 +81,6 @@
             `
             slide.appendChild(gif)
           }
-  
-          const span = document.createElement('span')
-          span.textContent = msg.message
-          span.style.cssText = 'font-size: 14px; line-height: 1.4;'
-          slide.appendChild(span)
   
           carousel.appendChild(slide)
         })
