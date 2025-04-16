@@ -75,8 +75,8 @@
             gif.src = msg.gifUrl
             gif.alt = ''
             gif.style.cssText = `
-              height: 32px;
-              width: 32px;
+              height: 6rem;
+              width: 6rem;
               object-fit: contain;
             `
             slide.appendChild(gif)
