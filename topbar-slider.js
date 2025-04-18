@@ -60,7 +60,7 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 0 12px;
+            padding: 0 8px;
             box-sizing: border-box;
             height: 100%;
           `
@@ -75,8 +75,8 @@
             gif.src = msg.gifUrl
             gif.alt = ''
             gif.style.cssText = `
-              height: 6rem;
-              width: 6rem;
+              height: 3rem;
+              width: 3rem;
               object-fit: contain;
             `
             slide.appendChild(gif)
