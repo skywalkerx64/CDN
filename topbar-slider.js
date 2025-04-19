@@ -6,7 +6,7 @@
     const apiBaseUrl = 'https://topbar.jeupix.com/api'
     const scriptTag = document.currentScript
     const urlParams = new URLSearchParams(scriptTag.src.split('?')[1])
-    const configId = urlParams.get('id')
+    const configId = 1
   
     if (!configId) return console.error('[TopBar] Missing config ID in script tag')
   
