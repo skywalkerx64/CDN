@@ -1,7 +1,7 @@
 ;(function () {
     const userAgent = navigator.userAgent || navigator.vendor
-    // const isInAppBrowser = /FBAN|FBAV|Instagram|Telegram/i.test(userAgent)
-    // if (!isInAppBrowser) return
+    const isInAppBrowser = /FBAN|FBAV|Instagram|Telegram/i.test(userAgent)
+    if (!isInAppBrowser) return
   
     const apiBaseUrl = 'https://topbar.jeupix.com/api'
     const scriptTag = document.currentScript
@@ -38,7 +38,7 @@
           font-family: system-ui, sans-serif;
           text-decoration: none;
           overflow: hidden;
-          height: 60px;
+          height: 40px;
           display: flex;
           align-items: center;
         `
@@ -75,8 +75,8 @@
             gif.src = msg.gifUrl
             gif.alt = ''
             gif.style.cssText = `
-              height: 3rem;
-              width: 3rem;
+              height: 40px;
+              width: 40px;
               object-fit: contain;
             `
             slide.appendChild(gif)
