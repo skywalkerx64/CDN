@@ -38,7 +38,7 @@
           font-family: system-ui, sans-serif;
           text-decoration: none;
           overflow: hidden;
-          height: 40px;
+          height: 35px;
           display: flex;
           align-items: center;
         `
@@ -75,8 +75,8 @@
             gif.src = msg.gifUrl
             gif.alt = ''
             gif.style.cssText = `
-              height: 40px;
-              width: 40px;
+              height: 35px;
+              width: 35px;
               object-fit: contain;
             `
             slide.appendChild(gif)
